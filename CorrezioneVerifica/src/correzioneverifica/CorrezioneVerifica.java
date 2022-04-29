@@ -34,7 +34,7 @@ public class CorrezioneVerifica {
 
             switch (numero) {
                 case 0:
-//                0: registrazione
+                //0: registrazione
                     System.out.println("Registrazione");
                     System.out.println("Username: ");
                     username = tastiera.next();
@@ -57,20 +57,20 @@ public class CorrezioneVerifica {
                     System.out.println("Password: ");
                     password = tastiera.next();
 
-                    token = sv.getToken(username, password);
-                    
+                    token = sv.getToken(username, password);              
                     break;
                     
                       case 2:
 //                1: setString
-                    System.out.println("getToken");
-                    System.out.println("Username: ");
-                    username = tastiera.next();
+                    System.out.println("setString");
+                    System.out.println("Token: ");
+                    
+                   
 
                     System.out.println("Password: ");
                     password = tastiera.next();
 
-                    token = sv.getToken(username, password);
+                    
                     
                     break;
 
