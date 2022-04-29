@@ -59,14 +59,15 @@ public class SaveStrings {
         String d = download("http://savestrings.netsons.org/SaveStrings/getToken.php?username=" + userEnc + "&password=" + passEnc);
 
         JSONObject o = new JSONObject(d);
-        Boolean status = o.getBoolean("status");
+        String status = o.getString("status");
 
-        if (!status) {
+        if (status.equals("error")) {
             String message = o.getString("message");
             return message;
         } else {
             JSONObject result = o.getJSONObject("result");
             String token = result.getString("token");
+            System.out.println(token);
             return token;
         }
     }

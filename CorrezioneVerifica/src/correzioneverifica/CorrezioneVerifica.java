@@ -7,6 +7,7 @@ package correzioneverifica;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Scanner;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
@@ -22,22 +23,60 @@ public class CorrezioneVerifica {
      */
     public static void main(String[] args) throws MalformedURLException, ParserConfigurationException, SAXException, IOException {
         // TODO code application logic here
-//        Scanner s = new Scanner(System.in);
-//        String citta = s.nextLine();
-//        openStreet a = new openStreet();
-//        a.getPlaces(citta);
-//        System.out.println(a.getPlaces(citta));
-        Scanner s = new Scanner(System.in);
-        String user = s.nextLine();
-        String pass = s.nextLine();
 
-        String key = s.nextLine();
-        String str = s.nextLine();
+        String username, password, key, token, str;
+        Scanner tastiera = new Scanner(System.in);
 
+        System.out.println("[0]-Registrati\n[1]-getToken\n[2]-setString\n[3]-getString\n[4]-deleteString\n[5]-getKeys\n");
         SaveStrings sv = new SaveStrings();
-        sv.register(user, pass);
-        sv.getToken(user, pass);
+        while (true) {
+            int numero = tastiera.nextInt();
+
+            switch (numero) {
+                case 0:
+//                0: registrazione
+                    System.out.println("Registrazione");
+                    System.out.println("Username: ");
+                    username = tastiera.next();
+
+                    System.out.println("Password: ");
+                    password = tastiera.next();
+
+                    sv.register(username, password);
+
+                    System.out.println("Registrazione completata:" + "User:" + username + " Pass:" + password);
+
+                    break;
+
+                case 1:
+//                1: getToken
+                    System.out.println("getToken");
+                    System.out.println("Username: ");
+                    username = tastiera.next();
+
+                    System.out.println("Password: ");
+                    password = tastiera.next();
+
+                    token = sv.getToken(username, password);
+                    
+                    break;
+                    
+                      case 2:
+//                1: setString
+                    System.out.println("getToken");
+                    System.out.println("Username: ");
+                    username = tastiera.next();
+
+                    System.out.println("Password: ");
+                    password = tastiera.next();
+
+                    token = sv.getToken(username, password);
+                    
+                    break;
+
+            }
+
+        }
 
     }
-
 }
