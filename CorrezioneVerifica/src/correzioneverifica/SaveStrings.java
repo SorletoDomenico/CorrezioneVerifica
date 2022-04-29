@@ -35,7 +35,7 @@ public class SaveStrings {
         String passEnc = URLEncoder.encode(Password, "UTF-8");
 
         //creo la connessione con il metodoto register.php
-        String d = download("http://172.16.102.100/SaveStrings/register.php?username=" + userEnc + "&password=" + passEnc);
+        String d = download("http://savestrings.netsons.org/SaveStrings/register.php?username=" + userEnc + "&password=" + passEnc);
 
         //dato che è un jason obj 
         JSONObject o = new JSONObject(d);
@@ -56,7 +56,7 @@ public class SaveStrings {
         String passEnc = URLEncoder.encode(Password, "UTF-8");
 
         //creo la connessione con il metodoto getToken.php
-        String d = download("http://172.16.102.100/SaveStrings/getToken.php?username=" + userEnc + "&password=" + passEnc);
+        String d = download("http://savestrings.netsons.org/SaveStrings/getToken.php?username=" + userEnc + "&password=" + passEnc);
 
         JSONObject o = new JSONObject(d);
         Boolean status = o.getBoolean("status");
@@ -77,9 +77,9 @@ public class SaveStrings {
         String keyEnc = URLEncoder.encode(Key, "UTF-8");
         String stringEnc = URLEncoder.encode(string, "UTF-8");
 
-        //creo la connessione con il metodoto getToken.php
-        String d = download("http://172.16.102.100/SaveStrings/setString.php?token=" + tokenEnc + "&key=" + keyEnc + "&string=" + stringEnc);
-       
+        //creo la connessione con il metodoto setString.php
+        String d = download("http://savestrings.netsons.org/SaveStrings/setString.php?token=" + tokenEnc + "&key=" + keyEnc + "&string=" + stringEnc);
+
         JSONObject o = new JSONObject(d);
         String status = o.getString("status");
 
@@ -87,10 +87,71 @@ public class SaveStrings {
             String message = o.getString("message");
             return message;
         } else {
-            
-        }
-        return null;
+            String result = o.getString("result");
+            return result;
+            //0d801772dc0ba29edf76d06214436241
 
+        }
+    }
+
+    public String getString(String Token, String Key) throws UnsupportedEncodingException, IOException {
+        String tokenEnc = URLEncoder.encode(Token, "UTF-8");
+        String keyEnc = URLEncoder.encode(Key, "UTF-8");
+
+        //creo la connessione con il metodoto deleteString.php
+        String d = download("http://savestrings.netsons.org/SaveStrings/getString.php?token=" + tokenEnc + "&key=" + keyEnc);
+
+        JSONObject o = new JSONObject(d);
+        String status = o.getString("status");
+
+        if (status.equals("error")) {
+            String message = o.getString("message");
+            return message;
+        } else {
+            JSONObject result = o.getJSONObject("result");
+            String key = result.getString("key");
+            String string = result.getString("string");
+            return key + "-" + string;
         }
 
     }
+
+    public String deleteString(String Token, String Key) throws UnsupportedEncodingException, IOException {
+        String tokenEnc = URLEncoder.encode(Token, "UTF-8");
+        String keyEnc = URLEncoder.encode(Key, "UTF-8");
+
+        //creo la connessione con il metodoto deleteString.php
+        String d = download("http://savestrings.netsons.org/SaveStrings/deleteString.php?token=" + tokenEnc + "&key=" + keyEnc);
+
+         JSONObject o = new JSONObject(d);
+        String status = o.getString("status");
+
+        if (status.equals("error")) {
+            String message = o.getString("message");
+            return message;
+        } else {
+            String result = o.getString("result");
+            return result;
+        }
+
+    }
+
+    public String getKeys(String Token) throws UnsupportedEncodingException, IOException {
+        String tokenEnc = URLEncoder.encode(Token, "UTF-8");
+
+        //creo la connessione con il metodoto getKeys.php
+        String d = download("http://savestrings.netsons.org/SaveStrings/getKeys.php?token=" + tokenEnc);
+
+        JSONObject o = new JSONObject(d);
+        String status = o.getString("status");
+
+        if (status.equals("error")) {
+            String message = o.getString("message");
+            return message;
+        } else {
+            String result = o.getString("result");
+            return result;
+        }
+    }
+
+}

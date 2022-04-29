@@ -22,11 +22,22 @@ public class CorrezioneVerifica {
      */
     public static void main(String[] args) throws MalformedURLException, ParserConfigurationException, SAXException, IOException {
         // TODO code application logic here
+//        Scanner s = new Scanner(System.in);
+//        String citta = s.nextLine();
+//        openStreet a = new openStreet();
+//        a.getPlaces(citta);
+//        System.out.println(a.getPlaces(citta));
         Scanner s = new Scanner(System.in);
-        String citta = s.nextLine();
-        openStreet a = new openStreet();
-        a.getPlaces(citta);
-        System.out.println(a.getPlaces(citta));
+        String user = s.nextLine();
+        String pass = s.nextLine();
+
+        String key = s.nextLine();
+        String str = s.nextLine();
+
+        SaveStrings sv = new SaveStrings();
+        sv.register(user, pass);
+        sv.getToken(user, pass);
+
     }
-    
+
 }
