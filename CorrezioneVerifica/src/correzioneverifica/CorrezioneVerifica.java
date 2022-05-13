@@ -47,7 +47,6 @@ public class CorrezioneVerifica {
                     System.out.println("Registrazione completata:" + "User:" + username + " Pass:" + password);
 
                     break;
-
                 case 1:
 //                1: getToken
                     System.out.println("getToken");
